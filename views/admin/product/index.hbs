@@ -1,0 +1,31 @@
+<!-- views/admin/product/index.hbs -->
+
+<h1>Danh sách sản phẩm</h1>
+<a class="btn btn-primary mb-2" href="/admin/product/add" role="button">Thêm sản phẩm mới</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Ảnh</th>
+            <th scope="col">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+        <tr>
+            <th scope="row">{{@index}}</th>
+            <td>{{ProName}}</td> <!-- Thay `ProductName` bằng tên trường tương ứng trong CSDL -->
+            <td><img src="{{ProductImage}}" alt="ProName" style="width: 100px;"></td> <!-- Thay `ProductImage` bằng tên trường tương ứng trong CSDL -->
+            <td class="text-right">
+                <a class="btn btn-danger" href="/admin/product/delete?id=ProID" role="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-primary" href="/admin/product/edit?id=ProID" role="button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

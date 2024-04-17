@@ -1,0 +1,21 @@
+{{#with Product}}
+<form action="" method="POST" role="form">
+    <div class="form-group">
+        <label for="id">#</label>
+        <input type="text" class="form-control" id="id" name="ProductID" value="{{ProductID}}" readonly="true">
+    </div>
+    <div class="form-group">
+        <label for="name">Tên sản phẩm</label>
+        <input type="text" class="form-control" id="name" name="ProductName" value="{{ProductName}}">
+    </div>
+    <!-- Thêm các trường thông tin khác của sản phẩm nếu cần -->
+    <a class="btn btn-outline-secondary" href="/admin/product" role="button">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        View List
+    </a>
+    <button type="submit" class="btn btn-outline-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Update
+    </button>
+</form>
+{{/with}}
