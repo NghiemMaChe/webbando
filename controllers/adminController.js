@@ -2,7 +2,7 @@ var express = require('express');
 var productRepo = require('../repos/productRepo');
 var categoryRepo = require('../repos/categoryRepo');
 var brandRepo = require('../repos/brandRepo');
-
+var orderRepo = require('../repos/orderRepo');
 var router = express.Router();
 var restrict = require('../middle-wares/restrict');
 
@@ -154,16 +154,40 @@ router.get('/product', restrict, (req, res) => {
     productRepo.loadAll().then(rows => {
         var vm = {
             layout: 'admin.handlebars',
-            products: rows
+            products: rows,
+            
         };
         res.render('admin/product/index', vm);
     });
 });
 
-router.get('/product/edit', restrict, (req, res) => {
-    productRepo.single(req.query.id).then(p => {
+router.get('/product/add', restrict, (req, res) => {
+    var vm = {
+        layout: 'admin.handlebars',
+
+        showAlert: false
+    }
+    res.render('admin/product/add', vm);
+});
+router.post('/product/add', restrict, (req, res) => {
+    productRepo.add(req.body).then(value => {
         var vm = {
-            Product: p,
+            layout: 'admin.handlebars',
+
+            showAlert: true
+        };
+        res.render('admin/product/add', vm);
+    }).catch(err => {
+        res.end('fail');
+    });
+});
+
+
+// Chỉnh sửa sản phẩm
+router.get('/product/edit', restrict, (req, res) => {
+    productRepo.single(req.query.id).then(b => {
+        var vm = {
+            Product: b,
             layout: 'admin.handlebars',
         };
         res.render('admin/product/edit', vm);
@@ -171,10 +195,14 @@ router.get('/product/edit', restrict, (req, res) => {
 });
 
 router.post('/product/edit', restrict, (req, res) => {
+    console.log(req.body);
     productRepo.update(req.body).then(value => {
         res.redirect('/admin/product');
     });
 });
+
+
+// Xóa sản phẩm
 
 router.get('/product/delete', restrict, (req, res) => {
     var vm = {
@@ -190,64 +218,19 @@ router.post('/product/delete', restrict, (req, res) => {
     });
 });
 
-router.get('/product/add', restrict, (req, res) => {
-    var vm = {
-        layout: 'admin.handlebars',
-        showAlert: false
-    }
-    res.render('admin/product/add', vm);
-});
-
-router.post('/product/add', restrict, (req, res) => {
-    productRepo.add(req.body).then(value => {
+router.get('/order', restrict, (req, res) => {
+    // Gọi phương thức loadAllOrders từ repo để lấy danh sách các đơn hàng
+    orderRepo.loadAll().then(orders => {
+        // Tạo view model chứa danh sách các đơn hàng
         var vm = {
             layout: 'admin.handlebars',
-            showAlert: true
+            orders: orders
         };
-        res.render('admin/product/add', vm);
+        // Render trang hiển thị đơn hàng với view model tương ứng
+        res.render('admin/order/index', vm);
     }).catch(err => {
+        // Xử lý lỗi nếu có
         res.end('fail');
     });
 });
-
-//====
-router.get('/product/add', (req, res) => {
-    categoryRepo.loadAll().then(categories => {
-        var vm = {
-            layout: 'admin.handlebars',
-            categories: categories
-        };
-        res.render('admin/product/add', vm);
-    }).catch(err => {
-        // Xử lý lỗi nếu cần
-    });
-});
-
-router.post('/product/add', (req, res) => {
-    var productName = req.body.productName;
-    var productDescription = req.body.productDescription;
-    var categoryId = req.body.productCategory;
-    var productPrice = req.body.productPrice;
-    var productQuantity = req.body.productQuantity;
-
-    var newProduct = {
-        ProductName: productName,
-        Description: productDescription,
-        CatID: categoryId,
-        Price: productPrice,
-        Quantity: productQuantity
-    };
-
-    productRepo.add(newProduct)
-        .then(() => {
-            // Chuyển hướng về trang danh sách sản phẩm sau khi thêm thành công
-            res.redirect('/admin/product');
-        })
-        .catch(err => {
-            // Xử lý lỗi nếu cần
-            res.end('Thêm sản phẩm mới thất bại');
-        });
-});
-//======================================================================================================================
-
 module.exports = router;

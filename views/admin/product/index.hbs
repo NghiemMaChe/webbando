@@ -7,6 +7,13 @@
         <tr>
             <th scope="col">STT</th>
             <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Mô tả sản phẩm</th>
+            <th scope="col">Giá sản phẩm</th>
+            <th scope="col">Số lượng sản phẩm</th>
+            <th scope="col">Lượt xem</th>
+            <th scope="col">Đã bán</th>
+            <th scope="col">Loại sản phẩm</th>
+            <th scope="col">Thương hiệu</th>
             <th scope="col">Ảnh</th>
             <th scope="col">&nbsp;</th>
         </tr>
@@ -15,13 +22,20 @@
         {{#each products}}
         <tr>
             <th scope="row">{{@index}}</th>
-            <td>{{ProName}}</td> <!-- Thay `ProductName` bằng tên trường tương ứng trong CSDL -->
-            <td><img src="{{ProductImage}}" alt="ProName" style="width: 100px;"></td> <!-- Thay `ProductImage` bằng tên trường tương ứng trong CSDL -->
+            <td>{{ProName}}</td> <!-- Thay `ProName` bằng tên trường tương ứng trong CSDL -->
+            <td>{{Description}}</td> <!-- Sử dụng trường dữ liệu `Description` -->
+            <td>{{Price}}</td> <!-- Sử dụng trường dữ liệu `Price` -->
+            <td>{{Quantity}}</td> <!-- Sử dụng trường dữ liệu `Quantity` -->
+            <td>{{Viewer}}</td> <!-- Sử dụng trường dữ liệu `Viewer` -->
+            <td>{{Sold}}</td> <!-- Sử dụng trường dữ liệu `Sold` -->
+            <td>{{CatID}}</td> <!-- Sử dụng trường dữ liệu `CatID` -->
+            <td>{{BrandID}}</td> <!-- Sử dụng trường dữ liệu `BrandID` -->
+            <td><img class="img-fluid" src="{{Img}} " style="width: 100px;"></td> <!-- Thay `ProID` bằng tên trường tương ứng trong CSDL -->
             <td class="text-right">
-                <a class="btn btn-danger" href="/admin/product/delete?id=ProID" role="button">
+                <a class="btn btn-danger" href="/admin/product/delete?id={{ProID}}" role="button">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn-primary" href="/admin/product/edit?id=ProID" role="button">
+                <a class="btn btn-primary" href="/admin/product/edit?id={{ProID}}" role="button">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
             </td>
@@ -29,3 +43,4 @@
         {{/each}}
     </tbody>
 </table>
+

@@ -1,30 +1,50 @@
-<!-- views/admin/product/add.hbs -->
-
 <h1>Thêm sản phẩm mới</h1>
-<form action="/admin/product/add" method="POST">
+<!-- Form thêm sản phẩm -->
+<form action="/admin/product/add" method="POST" role="form" enctype="multipart/form-data">
+    <!-- Các trường sản phẩm -->
+    <!-- Tên sản phẩm -->
     <div class="form-group">
         <label for="productName">Tên sản phẩm</label>
-        <input type="text" class="form-control" id="productName" name="productName" placeholder="Nhập tên sản phẩm">
+        <input type="text" class="form-control" id="productName" name="ProName" placeholder="Tên sản phẩm">
     </div>
+    <!-- Mô tả sản phẩm -->
     <div class="form-group">
         <label for="productDescription">Mô tả sản phẩm</label>
-        <textarea class="form-control" id="productDescription" name="productDescription" rows="3" placeholder="Nhập mô tả sản phẩm"></textarea>
+        <textarea class="form-control" id="productDescription" name="Description" placeholder="Mô tả sản phẩm"></textarea>
     </div>
+    <!-- Giá sản phẩm -->
     <div class="form-group">
-        <label for="productCategory">Loại sản phẩm</label>
-        <select class="form-control" id="productCategory" name="productCategory">
-            {{#each categories}}
-                <option value="CatID">CatName</option>
-            {{/each}}
-        </select>
+        <label for="productPrice">Giá sản phẩm</label>
+        <input type="number" class="form-control" id="productPrice" name="Price" placeholder="Giá sản phẩm">
     </div>
+    <!-- Số lượng sản phẩm -->
     <div class="form-group">
-        <label for="productPrice">Giá</label>
-        <input type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Nhập giá sản phẩm">
+        <label for="productQuantity">Số lượng sản phẩm</label>
+        <input type="number" class="form-control" id="productQuantity" name="Quantity" placeholder="Số lượng sản phẩm">
     </div>
+    <!-- Loại sản phẩm -->
     <div class="form-group">
-        <label for="productQuantity">Số lượng</label>
-        <input type="number" class="form-control" id="productQuantity" name="productQuantity" placeholder="Nhập số lượng sản phẩm">
+    <label for="productCategory">Loại sản phẩm</label>
+    <select class="form-control" id="productCategory" name="CatID">
+        <option value="1">Túi xách</option>
+        <option value="2">Ba lô</option>
+    </select>
     </div>
+    <!-- Thương hiệu -->
+    <div class="form-group">
+    <label for="productBrand">Thương hiệu</label>
+    <select class="form-control" id="productBrand" name="BrandID">
+        <option value="1">Mikkor</option>
+        <option value="2">Seliux</option>
+        <option value="3">Targus</option>
+        <option value="4">SimpleCarry</option>
+    </select>
+    </div>
+    <!-- Ảnh sản phẩm -->
+    <div class="form-group">
+        <label for="productImage">Ảnh sản phẩm</label>
+        <textarea class="form-control" id="productImage" name="Img" placeholder="">/img/30/thumbnail.jpg</textarea>
+    </div>
+    <!-- Nút submit -->
     <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
 </form>

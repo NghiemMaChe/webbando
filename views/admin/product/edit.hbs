@@ -1,21 +1,49 @@
-{{#with Product}}
-<form action="" method="POST" role="form">
+
+<h1>Chỉnh sửa sản phẩm</h1>
+<!-- Form chỉnh sửa sản phẩm -->
+<form action="/admin/product/edit" method="POST" role="form" enctype="multipart/form-data">
+    <!-- Các trường sản phẩm -->
+    <!-- Tên sản phẩm -->
     <div class="form-group">
-        <label for="id">#</label>
-        <input type="text" class="form-control" id="id" name="ProductID" value="{{ProductID}}" readonly="true">
+        <label for="productName">Tên sản phẩm</label>
+        <input type="text" class="form-control" id="productName" name="ProName" placeholder="Tên sản phẩm" value="{{Product.ProName}}">
     </div>
+    <!-- Mô tả sản phẩm -->
     <div class="form-group">
-        <label for="name">Tên sản phẩm</label>
-        <input type="text" class="form-control" id="name" name="ProductName" value="{{ProductName}}">
+        <label for="productDescription">Mô tả sản phẩm</label>
+        <textarea class="form-control" id="productDescription" name="Description" placeholder="Mô tả sản phẩm">{{Product.Description}}</textarea>
     </div>
-    <!-- Thêm các trường thông tin khác của sản phẩm nếu cần -->
-    <a class="btn btn-outline-secondary" href="/admin/product" role="button">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-        View List
-    </a>
-    <button type="submit" class="btn btn-outline-success">
+    <!-- Giá sản phẩm -->
+    <div class="form-group">
+        <label for="productPrice">Giá sản phẩm</label>
+        <input type="number" class="form-control" id="productPrice" name="Price" placeholder="Giá sản phẩm" value="{{Product.Price}}">
+    </div>
+    <!-- Số lượng sản phẩm -->
+    <div class="form-group">
+        <label for="productQuantity">Số lượng sản phẩm</label>
+        <input type="number" class="form-control" id="productQuantity" name="Quantity" placeholder="Số lượng sản phẩm" value="{{Product.Quantity}}">
+    </div>
+    <!-- Loại sản phẩm -->
+    <div class="form-group">
+        <label for="productCategory">Loại sản phẩm</label>
+        <textarea class="form-control" id="productCategory" name="CatID" placeholder="">{{Product.CatID}}</textarea>
+    </div>
+    <!-- Thương hiệu -->
+    <div class="form-group">
+        <label for="productBrand">Thương hiệu</label>
+        <textarea class="form-control" id="productBrand" name="BrandID" placeholder="">{{Product.BrandID}}</textarea>
+    </div>
+    <!-- Ảnh sản phẩm -->
+    <div class="form-group">
+        <label for="productImage">Ảnh sản phẩm</label>
+        <textarea class="form-control" id="productImage" name="Img" placeholder="Mô tả sản phẩm">{{Product.Img}}</textarea>
+    </div>
+  <button type="submit" class="btn btn-outline-success">
         <i class="fa fa-check" aria-hidden="true"></i>
         Update
     </button>
+    <a class="btn btn-outline-secondary" href="/admin/product" role="button">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Cancel
+    </a>
 </form>
-{{/with}}
